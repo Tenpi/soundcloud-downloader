@@ -3,7 +3,7 @@ const headers = {
 }
 
 function getTrack(html) {
-    const data = JSON.parse(html.match(/(\[{"id")(.*?)(?=\);)/)?.[0])
+    const data = JSON.parse(html.match(/(\[{"id")(.*?)(?=\);)/)[0])
     const track = data[5].data[0]
     return track
 }
