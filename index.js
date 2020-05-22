@@ -1,3 +1,7 @@
+const headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36"
+}
+
 const getTrack = (html) => {
     const data = JSON.parse(html.match(/(\[{"id")(.*?)(?=\);)/)?.[0])
     const track = data[5].data[0]
@@ -12,7 +16,7 @@ document.getElementById("submit").onclick = async () => {
     if (textBox.value.includes("m.soundcloud")) textBox.value = textBox.value.replace("m.soundcloud", "soundcloud")
     let result = ""
     try {
-        result = await fetch(`https://cors-anywhere.herokuapp.com/${textBox.value}`).then((r) => r.ok ? r.text() : Promise.reject("error"))
+        result = await fetch(`https://cors-anywhere.herokuapp.com/${textBox.value}`, {headers}).then((r) => r.ok ? r.text() : Promise.reject("error"))
     } catch {
         textBox.value = ""
         dlElement.innerHTML = "Invalid URL"
@@ -21,7 +25,7 @@ document.getElementById("submit").onclick = async () => {
     // const match = result.match(/(,{"url":")(.*?)(progressive)/)?.[0].replace(`,{"url":"`, "")
     const track = getTrack(result)
     const clientId = "yxIg2AHK1T7qjR5DnGHgDEftYB00McqD"
-    const mp3 = await fetch(`https://cors-anywhere.herokuapp.com/${track.media.transcodings[1].url}?client_id=${clientId}`).then((r) => r.json()).then((m) => m.url)
+    const mp3 = await fetch(`https://cors-anywhere.herokuapp.com/${track.media.transcodings[1].url}?client_id=${clientId}`, {headers}).then((r) => r.json()).then((m) => m.url)
     dlElement.innerHTML = `<a href="${mp3}" download id="download">${mp3}</a>`
     metadata.innerHTML = `
     <p><strong>Artist: </strong><a href="${track.user.permalink_url}">${track.user.username}</a> <strong>Track: </strong><a href="${track.permalink_url}">${track.title}</a></p>
