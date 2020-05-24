@@ -81,10 +81,10 @@ a:link {
     color: red;
   }
 
-  audio {
+audio {
     filter: invert(100%) brightness(200%);
-  }
+}
 
-  audio::-webkit-media-controls-panel {
+audio::-webkit-media-controls-panel {
     background-color: #64c6ff;
 }

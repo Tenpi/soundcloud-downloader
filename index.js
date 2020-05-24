@@ -8,7 +8,8 @@ const getTrack = (html) => {
     return track
 }
 
-document.getElementById("submit").onclick = async () => {
+document.getElementById("submit").onclick = async (event) => {
+    event.preventDefault()
     const textBox = document.getElementById("link")
     const dlElement = document.getElementById("dl-link")
     const audioElement = document.getElementById("audio-file")
