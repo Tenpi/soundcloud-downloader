@@ -67,20 +67,19 @@ a {
 
 a:link {
     color: orange;
-  }
+}
   
-  a:visited {
+a:visited {
     color: orangered;
-  }
-  
-  a:hover {
-    color: hotpink;
-  }
-  
-  a:active {
-    color: red;
-  }
+}
 
+a:hover {
+    color: hotpink;
+}
+
+a:active {
+    color: red;
+}
 audio {
     filter: invert(100%) brightness(200%);
 }
