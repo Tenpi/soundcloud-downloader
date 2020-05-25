@@ -14,7 +14,6 @@ document.getElementById("submit").onclick = async () => {
     const audioElement = document.getElementById("audio-file")
     const metadata = document.getElementById("metadata")
     if (textBox.value.includes("m.soundcloud")) textBox.value = textBox.value.replace("m.soundcloud", "soundcloud")
-    const secretToken = textBox.value.replace(/(.*\/.*\/.*\/.*\/.*\/)/, "")
     let result = ""
     try {
         result = await fetch(`https://cors-anywhere.herokuapp.com/${textBox.value}`, {headers}).then((r) => r.ok ? r.text() : Promise.reject("error"))
@@ -25,7 +24,7 @@ document.getElementById("submit").onclick = async () => {
     }
     const track = getTrack(result)
     const clientId = "yxIg2AHK1T7qjR5DnGHgDEftYB00McqD"
-    const mp3 = await fetch(`https://cors-anywhere.herokuapp.com/${track.media.transcodings[1].url}?secret_token=${secretToken}&client_id=${clientId}`, {headers}).then((r) => r.json()).then((m) => m.url)
+    const mp3 = await fetch(`https://cors-anywhere.herokuapp.com/${track.media.transcodings[1].url}`, {headers, client_id: clientId}).then((r) => r.json()).then((m) => m.url)
     dlElement.innerHTML = `<a href="${mp3}" download id="download">${mp3}</a>`
     metadata.innerHTML = `
     <p><strong>Artist: </strong><a href="${track.user.permalink_url}">${track.user.username}</a> <strong>Track: </strong><a href="${track.permalink_url}">${track.title}</a></p>
