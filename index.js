@@ -24,7 +24,7 @@ document.getElementById("submit").onclick = async () => {
     }
     const track = getTrack(result)
     const clientId = "yxIg2AHK1T7qjR5DnGHgDEftYB00McqD"
-    const url = `https://cors-anywhere.herokuapp.com/${track.media.transcodings[1].url}`
+    let url = `https://cors-anywhere.herokuapp.com/${track.media.transcodings[1].url}`
     url += url.includes("secret_token") ? `&client_id=${clientId}` : `?client_id=${clientId}`
     const mp3 = await fetch(url, {headers}).then((r) => r.json()).then((m) => m.url)
     dlElement.innerHTML = `<a href="${mp3}" download id="download">${mp3}</a>`
