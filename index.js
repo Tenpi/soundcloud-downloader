@@ -32,7 +32,7 @@ document.getElementById("submit").onclick = async () => {
     <a href="${track.artwork_url}"><img src="${track.artwork_url}"/></a>
     <br>
     <br>
-    `
+    ` 
     audioElement.innerHTML = `<audio src="${mp3}" type="audio/mpeg" controls></audio>`
     // audioElement.innerHTML = `<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${track.id}&color=%23ff34d2&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="${track.user.permalink_url}" title="${track.user.username}" target="_blank" style="color: #cccccc; text-decoration: none;">${track.user.username}</a> · <a href="${track.permalink_url}" title="${track.title}" target="_blank" style="color: #cccccc; text-decoration: none;">${track.title}</a></div>`
     textBox.value = ""
