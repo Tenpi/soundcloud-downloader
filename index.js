@@ -24,7 +24,9 @@ document.getElementById("submit").onclick = async () => {
     }
     const track = getTrack(result)
     const clientId = "yxIg2AHK1T7qjR5DnGHgDEftYB00McqD"
-    const mp3 = await fetch(`https://cors-anywhere.herokuapp.com/${track.media.transcodings[1].url}`, {headers, body: {client_id: clientId}}).then((r) => r.json()).then((m) => m.url)
+    const url = `https://cors-anywhere.herokuapp.com/${track.media.transcodings[1].url}`
+    url += url.includes("secret_token") ? `&client_id=${clientId}` : `?client_id=${clientId}`
+    const mp3 = await fetch(url, {headers}).then((r) => r.json()).then((m) => m.url)
     dlElement.innerHTML = `<a href="${mp3}" download id="download">${mp3}</a>`
     metadata.innerHTML = `
     <p><strong>Artist: </strong><a href="${track.user.permalink_url}">${track.user.username}</a> <strong>Track: </strong><a href="${track.permalink_url}">${track.title}</a></p>
