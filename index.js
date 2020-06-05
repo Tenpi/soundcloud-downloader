@@ -1,4 +1,5 @@
 const headers = {
+    "referer": "https://soundcloud.com/",
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36"
 }
 
@@ -14,7 +15,7 @@ document.getElementById("submit").onclick = async () => {
     const audioElement = document.getElementById("audio-file")
     const metadata = document.getElementById("metadata")
     if (textBox.value.includes("m.soundcloud")) textBox.value = textBox.value.replace("m.soundcloud", "soundcloud")
-    let result = ""
+    let result = null
     try {
         result = await fetch(`https://cors-anywhere.herokuapp.com/${textBox.value}`, {headers}).then((r) => r.ok ? r.text() : Promise.reject("error"))
     } catch {
@@ -29,13 +30,10 @@ document.getElementById("submit").onclick = async () => {
     const mp3 = await fetch(url, {headers}).then((r) => r.json()).then((m) => m.url)
     dlElement.innerHTML = `<a href="${mp3}" download id="download">${mp3}</a>`
     metadata.innerHTML = `
-    <p><strong>Artist: </strong><a href="${track.user.permalink_url}">${track.user.username}</a> <strong>Track: </strong><a href="${track.permalink_url}">${track.title}</a></p>
-    <br>
-    <a href="${track.artwork_url}"><img src="${track.artwork_url}"/></a>
-    <br>
-    <br>
+    <p><strong>Artist: </strong><a href="${track.user.permalink_url}">${track.user.username}</a> <strong>Track: </strong><a href="${track.permalink_url}">${track.title}</a></p><br>
+    <a href="${track.artwork_url}"><img src="${track.artwork_url}"/></a><br><br>
     `
-    audioElement.innerHTML = `<audio src="${mp3}" type="audio/mpeg" controls></audio>`
+    audioElement.innerHTML = `<audio src="${mp3}" type="audio/mpeg" controls loop></audio>`
     // audioElement.innerHTML = `<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${track.id}&color=%23ff34d2&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="${track.user.permalink_url}" title="${track.user.username}" target="_blank" style="color: #cccccc; text-decoration: none;">${track.user.username}</a> · <a href="${track.permalink_url}" title="${track.title}" target="_blank" style="color: #cccccc; text-decoration: none;">${track.title}</a></div>`
     textBox.value = ""
 }
