@@ -5,7 +5,7 @@ const headers = {
 
 const getTrack = (html) => {
     const data = JSON.parse(html.match(/(\[{"id")(.*?)(?=\);)/)?.[0])
-    const track = data[5].data[0]
+    const track = data[6].data[0]
     return track
 }
 
@@ -24,7 +24,7 @@ document.getElementById("submit").onclick = async () => {
         return
     }
     const track = getTrack(result)
-    const clientId = "o7SyzdUNIsaDs0oIlsVHtupPDSknbl6f"
+    const clientId = "UlLPjebQv7v50PMLub2mbFUhW7WWUp7P"
     let url = `https://cors-anywhere.herokuapp.com/${track.media.transcodings[1].url}`
     url += url.includes("secret_token") ? `&client_id=${clientId}` : `?client_id=${clientId}`
     const mp3 = await fetch(url, {headers}).then((r) => r.json()).then((m) => m.url)
