@@ -1,5 +1,7 @@
 # Soundcloud Download Website
 
-This is my first website, it's very simple. All it does is let you download a track from soundcloud.
+![scdl](https://github.com/Tenpi/soundcloud-download/blob/master/assets/scdl-img.png)
 
-https://tenpi.github.io/soundcloud-download/
+This is a very simple website that lets you download a track from soundcloud.
+
+Link: https://tenpi.github.io/soundcloud-download/
